@@ -8,6 +8,7 @@ describe "Get Options to Block" do
 
     it "Should Return Parameters passed to it" do
         __beamer_get_options(:foo => "bar", :baz => 0.8).should == "[foo=bar,baz=0.8]"
+        __beamer_get_options(:foo => "bar", :baz => nil).should == "[foo=bar,baz]"
     end
 end
 

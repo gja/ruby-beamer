@@ -4,7 +4,7 @@ module RubyBeamer
         return "" if args.empty?
 
         values = []
-        args.each_pair{|k, v| values << "#{k}=#{v}" }
+        args.each_pair{|k, v| values << "#{k}#{"=" if v}#{v}" }
         return "[" + values.join(",") + "]"
     end
 

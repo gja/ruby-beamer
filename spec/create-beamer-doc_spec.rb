@@ -36,4 +36,9 @@ EOF
 EOF
     end
 
+    it "Should be possible to pass global options to the document" do
+        beamer_document :global_options => "table"
+        printed.should include "\\documentclass[table]{beamer}"
+    end
+
 end
