@@ -42,3 +42,10 @@ EOF
 EOF
     end
 end
+
+describe "Create one line blocks" do
+    it "Should be able to create a one line block" do
+        create_oneline_block(:em){"foo"}
+        printed.should == "\\em{foo}\n"
+    end
+end

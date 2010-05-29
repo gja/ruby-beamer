@@ -14,4 +14,10 @@ module RubyBeamer
         output content, "\n" if content
         output "\\end{#{type}}\n"
     end
+
+    def create_oneline_block(type, &block)
+        output "\\#{type}{"
+        output yield if block
+        output "}\n"
+    end
 end
