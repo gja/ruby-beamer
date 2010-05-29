@@ -1,0 +1,16 @@
+History.txt
+Manifest.txt
+README.rdoc
+Rakefile
+lib/ruby-beamer.rb
+lib/ruby-beamer/create-beamer-doc.rb
+lib/ruby-beamer/create-block.rb
+script/console
+script/destroy
+script/generate
+spec/create-beamer-doc_spec.rb
+spec/create-block_spec.rb
+spec/ruby-beamer_spec.rb
+spec/spec.opts
+spec/spec_helper.rb
+tasks/rspec.rake
