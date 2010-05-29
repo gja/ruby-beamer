@@ -5,5 +5,5 @@ module RubyBeamer
   VERSION = '0.0.1'
 end
 
+require 'ruby-beamer/common'
 require 'ruby-beamer/create-beamer-doc'
-require 'ruby-beamer/create-block'

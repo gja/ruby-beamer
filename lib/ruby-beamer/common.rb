@@ -1,0 +1,14 @@
+def __beamer_get_options(args = nil)
+    return "" if not args
+    return "" if args.empty?
+
+    values = []
+    args.each_pair{|k, v| values << "#{k}=#{v}" }
+    return "[" + values.join(",") + "]"
+end
+
+def create_block(type, &block)
+    print "\\begin{#{type}}\n"
+    yield if block
+    print "\\end{#{type}}\n"
+end
