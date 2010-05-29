@@ -42,6 +42,11 @@ foo
         printed.should == "\\item<1->{First Item}\n"
     end
 
+    it "Should be possible to pass an item a string" do
+        item "string"
+        printed.should == "\\item{string}\n"
+    end
+
     it "Should be able to create a title frame" do
         title_frame :plain
         printed.should == <<-eos

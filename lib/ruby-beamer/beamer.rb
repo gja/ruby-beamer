@@ -15,8 +15,13 @@ module RubyBeamer
         create_block(:itemize, &block)
     end
 
-    def item(args = {}, &block)
-        appear_on_slides = "<#{args[:on]}>" if args[:on]
+    def item(*args, &block)
+        text = args.shift if args[0].is_a? String
+        block = lambda { text } if text
+
+        properties = args[0] || {}
+        appear_on_slides = "<#{properties[:on]}>" if properties[:on]
+
         create_oneline_block(:item, :arguments => appear_on_slides, &block)
     end
 
