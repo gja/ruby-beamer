@@ -1,5 +1,5 @@
 module RubyBeamer
-    def frame(title, &block)
+    def frame(title = nil, &block)
         create_block(:frame, :arguments => "{#{title}}", &block)
     end
 
