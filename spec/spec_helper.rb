@@ -13,6 +13,7 @@ def printed
     @printed || ""
 end
 
-def print(string)
-    @printed = printed + string
+def print(*args)
+    @printed = args.inject(printed){|p, s| p + s}
+    nil
 end

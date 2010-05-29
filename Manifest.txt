@@ -2,6 +2,7 @@ History.txt
 Manifest.txt
 README.rdoc
 Rakefile
+bin/rubylatex
 lib/ruby-beamer.rb
 lib/ruby-beamer/common.rb
 lib/ruby-beamer/create-beamer-doc.rb

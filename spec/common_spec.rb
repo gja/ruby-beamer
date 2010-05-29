@@ -20,6 +20,15 @@ describe "Create Beamer Block" do
 EOF
     end
 
+    it "Should be able to print out a string passed to it as a block" do
+        create_block(:document) {"foo"}
+        printed.should == <<EOF
+\\begin{document}
+foo
+\\end{document}
+EOF
+    end
+
     it "Should Be Able to accept another block as parameters" do
         create_block :document do
             create_block :frame

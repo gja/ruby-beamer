@@ -9,6 +9,7 @@ end
 
 def create_block(type, &block)
     print "\\begin{#{type}}\n"
-    yield if block
+    content = yield if block
+    print content, "\n" if content
     print "\\end{#{type}}\n"
 end
