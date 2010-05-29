@@ -8,15 +8,17 @@ module RubyBeamer
         return "[" + values.join(",") + "]"
     end
 
-    def create_block(type, &block)
-        output "\\begin{#{type}}\n"
+    def create_block(type, args = {}, &block)
+        arguments = args[:arguments] || ""
+        output "\\begin{#{type}}", arguments, "\n"
         content = yield if block
         output content, "\n" if content
         output "\\end{#{type}}\n"
     end
 
-    def create_oneline_block(type, &block)
-        output "\\#{type}{"
+    def create_oneline_block(type, args = {}, &block)
+        arguments = args[:arguments] || ""
+        output "\\#{type}#{arguments}{"
         output yield if block
         output "}\n"
     end

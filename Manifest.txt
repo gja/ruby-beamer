@@ -4,11 +4,14 @@ README.rdoc
 Rakefile
 bin/rubylatex
 lib/ruby-beamer.rb
+lib/ruby-beamer/beamer.rb
 lib/ruby-beamer/common.rb
+lib/ruby-beamer/constants.rb
 lib/ruby-beamer/create-beamer-doc.rb
 script/console
 script/destroy
 script/generate
+spec/beamer_spec.rb
 spec/common_spec.rb
 spec/create-beamer-doc_spec.rb
 spec/ruby-beamer_spec.rb

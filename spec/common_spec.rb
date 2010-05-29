@@ -21,6 +21,14 @@ describe "Create Beamer Block" do
 EOF
     end
 
+    it "Should be able to pass arguments to a beamer block" do
+        create_block :document, :arguments => "{foo}"
+        printed.should == <<EOF
+\\begin{document}{foo}
+\\end{document}
+EOF
+    end
+
     it "Should be able to print out a string passed to it as a block" do
         create_block(:document) {"foo"}
         printed.should == <<EOF
@@ -48,5 +56,10 @@ describe "Create one line blocks" do
     it "Should be able to create a one line block" do
         create_oneline_block(:em){"foo"}
         printed.should == "\\em{foo}\n"
+    end
+
+    it "Should be able to create a one line block with arguments" do
+        create_oneline_block(:em, :arguments => "[bar]"){"foo"}
+        printed.should == "\\em[bar]{foo}\n"
     end
 end
