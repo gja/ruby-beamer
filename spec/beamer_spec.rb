@@ -43,7 +43,7 @@ foo
     end
 
     it "Should be able to create a title frame" do
-        title_frame
+        title_frame :plain
         printed.should == <<-eos
 \\begin{frame}[plain]
 \\titlepage

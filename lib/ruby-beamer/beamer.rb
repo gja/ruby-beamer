@@ -20,8 +20,8 @@ module RubyBeamer
         create_oneline_block(:item, :arguments => appear_on_slides, &block)
     end
 
-    def title_frame
-        create_block(:frame, :arguments => "[plain]") { "\\titlepage" }
+    def title_frame(*args)
+        create_block(:frame, :arguments => __beamer_get_options(*args)) { "\\titlepage" }
     end
 
     def table_of_contents_frame(*arguments)
