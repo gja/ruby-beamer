@@ -18,4 +18,13 @@ module RubyBeamer
     def title_frame
         create_block(:frame, :arguments => "[plain]") { "\\titlepage" }
     end
+
+    def image(path, *arguments)
+        image_properties = __beamer_get_options(*arguments)
+        create_oneline_block(:includegraphics, :arguments => image_properties) { path }
+    end
+
+    def center(&block)
+        create_block(:center, &block)
+    end
 end

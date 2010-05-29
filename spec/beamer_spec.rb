@@ -36,4 +36,23 @@ foo
 \\end{frame}
         eos
     end
+
+    it "Should be able to create an image" do
+        image("foo.png")
+        printed.should == "\\includegraphics{foo.png}\n"
+    end
+
+    it "Should be able to set height and width" do
+        image("foo.png", :height => "10", :width => "10")
+        printed.should == "\\includegraphics[height=10,width=10]{foo.png}\n"
+    end
+
+    it "Should be able to center some text" do
+        center{"text"}
+        printed.should == <<-eos
+\\begin{center}
+text
+\\end{center}
+        eos
+    end
 end
