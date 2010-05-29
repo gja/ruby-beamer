@@ -2,13 +2,12 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe "Get Options to Block" do
     it "Should Return Empty if nothing is passed to it" do
-        __beamer_get_options(nil).should() == ""
-        __beamer_get_options({}).should() == ""
+        __beamer_get_options().should() == ""
     end
 
     it "Should Return Parameters passed to it" do
         __beamer_get_options(:foo => "bar", :baz => 0.8).should == "[foo=bar,baz=0.8]"
-        __beamer_get_options(:foo => "bar", :baz => nil).should == "[foo=bar,baz]"
+        __beamer_get_options(:foo, :bar => "baz").should == "[foo,bar=baz]"
     end
 end
 
@@ -66,5 +65,17 @@ describe "Create one line blocks" do
     it "Should be able to create a one line block with arguments" do
         create_oneline_block(:em, :arguments => "[bar]"){"foo"}
         printed.should == "\\em[bar]{foo}\n"
+    end
+end
+
+describe "Text Block" do
+    it "Should be able to create a text block" do
+        text {"foo"}
+        printed.should == "foo"
+    end
+
+    it "Should be able to print a new line" do
+        new_line
+        printed.should == "\\\\"
     end
 end

@@ -10,6 +10,15 @@ foo
         eos
     end
 
+    it "Should create a block" do
+        block("title") { "foo" }
+        printed.should == <<-eos
+\\begin{block}{title}
+foo
+\\end{block}
+        eos
+    end
+
     it "Should create a resizebox" do
         resize_box(TEXT_WIDTH, TEXT_HEIGHT) { "foo" }
         printed.should == "\\resizebox{\\textwidth}{\\textheight}{foo}\n"
@@ -17,8 +26,8 @@ foo
 
     it "Should be able to create an itemized list" do
         itemized_list do
-            item "First Item"
-            item "Second Item"
+            item {"First Item"}
+            item {"Second Item"}
         end
         printed.should == <<-eos
 \\begin{itemize}
@@ -26,6 +35,11 @@ foo
 \\item{Second Item}
 \\end{itemize}
         eos
+    end
+
+    it "Should be able to specify which slide an item appears on" do
+        item(:on => "1-") {"First Item"}
+        printed.should == "\\item<1->{First Item}\n"
     end
 
     it "Should be able to create a title frame" do
@@ -47,12 +61,27 @@ foo
         printed.should == "\\includegraphics[height=10,width=10]{foo.png}\n"
     end
 
-    it "Should be able to center some text" do
-        center{"text"}
+    it "Should be able to create sections and subsections" do
+        section "foo" do
+            sub_section "bar" do
+                "baz"
+            end
+        end
         printed.should == <<-eos
-\\begin{center}
-text
-\\end{center}
+\\section{foo}
+\\subsection{bar}
+baz
+\\subsection{}
+\\section{}
+        eos
+    end
+
+    it "should be able to create a table of contents frame" do
+        table_of_contents_frame :hideallsubsections, :section => 1
+        printed.should == <<-eos
+\\begin{frame}
+\\tableofcontents[hideallsubsections,section=1]{}
+\\end{frame}
         eos
     end
 end

@@ -1,11 +1,24 @@
 module RubyBeamer
-    def __beamer_get_options(args = nil)
-        return "" if not args
+    def __beamer_get_options(*args)
         return "" if args.empty?
 
-        values = []
-        args.each_pair{|k, v| values << "#{k}#{"=" if v}#{v}" }
+        values = args.inject([]) do |val, arg|
+            if (arg.is_a? Hash)
+                arg.each_pair {|k, v| val << "#{k}=#{v}" }
+            else
+                val << arg.to_sym
+            end
+            val
+        end
+
         return "[" + values.join(",") + "]"
+    end
+
+    def __wrap_in_section(type, title, &block)
+        create_oneline_block(type) {title}
+        content = yield if block
+        output content, "\n" if content
+        create_oneline_block(type)
     end
 
     def create_block(type, args = {}, &block)
@@ -22,5 +35,14 @@ module RubyBeamer
         content = yield if block
         output content if content
         output "}\n"
+    end
+
+    def text
+        content = yield
+        output content if content
+    end
+
+    def new_line
+        text { "\\\\" }
     end
 end

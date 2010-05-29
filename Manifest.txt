@@ -8,6 +8,7 @@ lib/ruby-beamer/beamer.rb
 lib/ruby-beamer/common.rb
 lib/ruby-beamer/constants.rb
 lib/ruby-beamer/create-beamer-doc.rb
+lib/ruby-beamer/text.rb
 script/console
 script/destroy
 script/generate
@@ -17,4 +18,5 @@ spec/create-beamer-doc_spec.rb
 spec/ruby-beamer_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
+spec/text_spec.rb
 tasks/rspec.rake

@@ -6,4 +6,7 @@ module RubyBeamer
     PAGE_HEIGHT = "\\pageheight"
 
     NEWLINE = "\\\\"
+
+    SECTION = "\\insertsection"
+    SUB_SECTION = "\\insertsubsection"
 end
