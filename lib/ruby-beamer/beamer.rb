@@ -24,8 +24,8 @@ module RubyBeamer
         create_block(:frame, :arguments => __beamer_get_options(*args)) { "\\titlepage" }
     end
 
-    def table_of_contents_frame(*arguments)
-        create_block(:frame) { create_oneline_block(:tableofcontents, :arguments => __beamer_get_options(*arguments)) }
+    def table_of_contents_frame(title, *arguments)
+        frame(title) { create_oneline_block(:tableofcontents, :arguments => __beamer_get_options(*arguments)) }
     end
 
     def image(path, *arguments)

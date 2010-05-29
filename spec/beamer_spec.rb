@@ -77,9 +77,9 @@ baz
     end
 
     it "should be able to create a table of contents frame" do
-        table_of_contents_frame :hideallsubsections, :section => 1
+        table_of_contents_frame "Overview", :hideallsubsections, :section => 1
         printed.should == <<-eos
-\\begin{frame}
+\\begin{frame}{Overview}
 \\tableofcontents[hideallsubsections,section=1]{}
 \\end{frame}
         eos
