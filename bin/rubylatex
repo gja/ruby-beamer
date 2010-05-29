@@ -14,6 +14,8 @@ module RubyBeamer
     end
 end
 
-if ARGV[0]
-    load ARGV[0]
+script = ARGV[0]
+if script
+    ARGV.shift
+    load script
 end
