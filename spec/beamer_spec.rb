@@ -14,4 +14,26 @@ foo
         resize_box(TEXT_WIDTH, TEXT_HEIGHT) { "foo" }
         printed.should == "\\resizebox{\\textwidth}{\\textheight}{foo}\n"
     end
+
+    it "Should be able to create an itemized list" do
+        itemized_list do
+            item "First Item"
+            item "Second Item"
+        end
+        printed.should == <<-eos
+\\begin{itemize}
+\\item{First Item}
+\\item{Second Item}
+\\end{itemize}
+        eos
+    end
+
+    it "Should be able to create a title frame" do
+        title_frame
+        printed.should == <<-eos
+\\begin{frame}[plain]
+\\titlepage
+\\end{frame}
+        eos
+    end
 end

@@ -41,4 +41,29 @@ EOF
         printed.should include "\\documentclass[table]{beamer}"
     end
 
+    it "Should be able to set the title" do
+        beamer_document :title => "title"
+        printed.should include "\\title{title}\n"
+    end
+
+    it "Should be able to set the subtitle" do
+        beamer_document :subtitle => "title"
+        printed.should include "\\subtitle{title}\n"
+    end
+
+    it "Should be able to set the title" do
+        beamer_document :author => "title"
+        printed.should include "\\author{title}\n"
+    end
+
+    it "Should be able to set the title" do
+        beamer_document :date => "title"
+        printed.should include "\\date{title}\n"
+    end
+
+    it "Should be able to set a short and long title" do
+        beamer_document :title => ["short", "title"]
+        printed.should include "\\title[short]{title}\n"
+    end
+
 end
