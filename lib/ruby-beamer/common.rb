@@ -19,7 +19,8 @@ module RubyBeamer
     def create_oneline_block(type, args = {}, &block)
         arguments = args[:arguments] || ""
         output "\\#{type}#{arguments}{"
-        output yield if block
+        content = yield if block
+        output content if content
         output "}\n"
     end
 end

@@ -58,6 +58,11 @@ describe "Create one line blocks" do
         printed.should == "\\em{foo}\n"
     end
 
+    it "Should be able to create a one line block" do
+        create_oneline_block(:em){nil}
+        printed.should == "\\em{}\n"
+    end
+
     it "Should be able to create a one line block with arguments" do
         create_oneline_block(:em, :arguments => "[bar]"){"foo"}
         printed.should == "\\em[bar]{foo}\n"
