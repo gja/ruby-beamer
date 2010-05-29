@@ -12,10 +12,6 @@ foo
 
     it "Should create a resizebox" do
         resize_box(TEXT_WIDTH, TEXT_HEIGHT) { "foo" }
-        printed.should == <<-eos
-\\begin{resizebox}{\\textwidth}{\\textheight}
-foo
-\\end{resizebox}
-        eos
+        printed.should == "\\resizebox{\\textwidth}{\\textheight}{foo}\n"
     end
 end

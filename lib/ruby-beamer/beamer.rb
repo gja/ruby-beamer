@@ -4,6 +4,6 @@ module RubyBeamer
     end
 
     def resize_box(width, height, &block)
-        create_block(:resizebox, :arguments => "{#{width}}{#{height}}", &block)
+        create_oneline_block(:resizebox, :arguments => "{#{width}}{#{height}}", &block)
     end
 end
