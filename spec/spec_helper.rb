@@ -9,11 +9,15 @@ end
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'ruby-beamer'
 
-def printed   
-    @printed || ""
-end
+include RubyBeamer
 
-def print(*args)
-    @printed = args.inject(printed){|p, s| p + s}
-    nil
+module RubyBeamer
+    def printed
+        @printed || ""
+    end
+
+    def print(*args)
+        @printed = args.inject(printed){|p, s| p + s}
+        nil
+    end
 end
