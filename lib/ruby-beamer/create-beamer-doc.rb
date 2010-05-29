@@ -2,10 +2,10 @@ module RubyBeamer
     def beamer_document(args = {}, &block)
         theme = args[:theme] || "default"
 
-        print "\\documentclass{beamer}\n"
-        print "\\usetheme{#{theme}}\n"
+        output "\\documentclass{beamer}\n"
+        output "\\usetheme{#{theme}}\n"
 
-        print "\\setbeamertemplate{navigation symbols}{}\n" if args[:disable_navigation]
+        output "\\setbeamertemplate{navigation symbols}{}\n" if args[:disable_navigation]
 
         create_block :document, &block
     end

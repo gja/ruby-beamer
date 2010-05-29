@@ -9,9 +9,9 @@ module RubyBeamer
     end
 
     def create_block(type, &block)
-        print "\\begin{#{type}}\n"
+        output "\\begin{#{type}}\n"
         content = yield if block
-        print content, "\n" if content
-        print "\\end{#{type}}\n"
+        output content, "\n" if content
+        output "\\end{#{type}}\n"
     end
 end

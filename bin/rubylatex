@@ -7,6 +7,13 @@ require 'rubygems'
 require File.expand_path(File.dirname(__FILE__) + "/../lib/ruby-beamer")
 include RubyBeamer
 
+module RubyBeamer
+    def output(*args)
+        print(*args)
+        nil
+    end
+end
+
 if ARGV[0]
     load ARGV[0]
 end

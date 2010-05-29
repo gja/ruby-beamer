@@ -16,7 +16,7 @@ module RubyBeamer
         @printed || ""
     end
 
-    def print(*args)
+    def output(*args)
         @printed = args.inject(printed){|p, s| p + s}
         nil
     end
