@@ -49,4 +49,9 @@ text
         em (:on => "5-") { "text" }
         printed.should == "\\em<5->{text}\n"
     end
+
+    it "Should be able to show an only block" do
+        only(:on => "4") { "text" }
+        printed.should == "\\only<4>{text}\n"
+    end
 end

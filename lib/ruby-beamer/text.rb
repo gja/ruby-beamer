@@ -10,7 +10,8 @@ module RubyBeamer
         :footnote => :footnotesize,
         :teletype => :tt,
         :structure => :structure,
-        :vspace => :vspace
+        :vspace => :vspace,
+        :only => :only
     }
 
     def method_missing(method, *args, &block)
