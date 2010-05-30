@@ -39,13 +39,6 @@ module RubyBeamer
         return "[" + values.join(",") + "]"
     end
 
-    def __wrap_in_section(type, title, &block)
-        create_oneline_block(type) {title}
-        content = yield if block
-        output content, "\n" if content
-        create_oneline_block(type)
-    end
-
     def __print_block(starting, separator, content_start, ending, args, &block)
         block_args = (args.delete :arguments) || ""
         appear_on = ("<#{args.delete :on}>" if args.has_key? :on) || ""

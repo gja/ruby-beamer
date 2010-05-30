@@ -76,8 +76,6 @@ foo
 \\section{foo}
 \\subsection{bar}
 baz
-\\subsection{}
-\\section{}
         eos
     end
 

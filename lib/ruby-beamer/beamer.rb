@@ -39,6 +39,12 @@ module RubyBeamer
         create_oneline_block(:includegraphics, hash) { path }
     end
 
+    def __wrap_in_section(type, title, &block)
+        create_oneline_block(type) {title}
+        content = yield if block
+        output content, "\n" if content
+    end
+
     def section(title, &block)
         __wrap_in_section(:section, title, &block)
     end
