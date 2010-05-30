@@ -1,26 +1,53 @@
 = ruby-beamer
 
-* http://github.com/#{github_username}/#{project_name}
+* http://github.com/gja/ruby-beamer
 
 == DESCRIPTION:
 
-FIX (describe your package)
+* A gem that helps you describe latex documents in a ruby environment
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Still quite basic, not all latex markup is possible
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+simple.rb: 
+beamer_document :author => "Tejas Dinkar",
+                :date => "Today",
+                :title => "An Example",
+                :theme => "Warsaw",
+                :disable_navigation => true do
+
+    title_frame
+
+    frame "A Sample Slide" do
+        text {"An Itemized List:"}
+
+        itemized_list do
+            item "Itemized Item 1"
+            item "Itemized Item 2", :on => "2-"
+            item "Itemized Item 3", :on => "3-"
+        end
+
+        vspace{"2cm"}
+
+        block "A Simple Theorem" do
+            "In a right triangle, the square of hypotenuse equals the sum of squares of two other sides"
+        end
+    end
+end
+
+$ rubylatex simple.rb | pdflatex
+$ okular texput.pdf
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* To be able to create any tex document from ruby like code
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install ruby-latex
 
 == LICENSE:
 
