@@ -1,16 +1,28 @@
 module RubyBeamer
+    class ::Array
+        def to_beamer_hash
+            inject({}) do |values, arg|
+                if(arg.is_a? Hash)
+                    values.merge! arg
+                else
+                    values[arg] = nil
+                end
+                values
+            end
+        end
+    end
+
+    class ::Hash
+        def remove_key(key)
+            answer = has_key? key
+            delete key
+            answer
+        end
+    end
+
     def __beamer_get_options(*args)
         return "" if args.empty?
-
-        values = args.inject([]) do |val, arg|
-            if (arg.is_a? Hash)
-                arg.each_pair {|k, v| val << "#{k}=#{v}" }
-            else
-                val << arg.to_sym
-            end
-            val
-        end
-
+        values = args.to_beamer_hash.inject([]) {|values, tuple| values << "#{tuple[0]}#{"=" if tuple[1]}#{tuple[1]}" }
         return "[" + values.join(",") + "]"
     end
 

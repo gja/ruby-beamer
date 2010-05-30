@@ -9,6 +9,23 @@ describe "Get Options to Block" do
         __beamer_get_options(:foo => "bar", :baz => 0.8).should == "[foo=bar,baz=0.8]"
         __beamer_get_options(:foo, :bar => "baz").should == "[foo,bar=baz]"
     end
+
+    it "Should be able to generate a beamer hash" do
+        array = [:foo, :bar, {:ooga => "ooga", :booga => "booga"}]
+        hash = array.to_beamer_hash
+        hash.should have_key :foo
+        hash[:foo].should be_nil
+        hash.should have_key :bar
+        hash[:bar].should be_nil
+        hash[:ooga].should == "ooga"
+        hash[:booga].should == "booga"
+    end
+
+    it "Should be able to delete a key if present" do
+        hash = [:foo, :bar].to_beamer_hash
+        hash.remove_key(:foo).should be_true
+        hash.remove_key(:foo).should be_false
+    end
 end
 
 describe "Create Beamer Block" do
