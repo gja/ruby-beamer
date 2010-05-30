@@ -20,4 +20,8 @@ module RubyBeamer
         @printed = args.inject(printed){|p, s| p + s}
         nil
     end
+
+    def get_beamer_hash(*args)
+        return args.to_beamer_hash
+    end
 end

@@ -23,18 +23,20 @@ module RubyBeamer
 
     def title_frame(*args)
         hash = args.to_beamer_hash
-        properties = hash.pop_entries :plain
-        create_block(:frame, hash.merge!(:arguments => __beamer_get_options(properties))) { "\\titlepage" }
+        hash.set_beamer_arguments_from :plain
+        create_block(:frame, hash) { "\\titlepage" }
     end
 
     def table_of_contents_frame(title, *arguments)
-        frame(title) { create_oneline_block(:tableofcontents, :arguments => __beamer_get_options(*arguments)) }
+        hash = arguments.to_beamer_hash
+        hash.set_beamer_arguments_from :currentsection, :hideothersubsections, :section, :hideallsubsections
+        frame(title) { create_oneline_block(:tableofcontents, hash) }
     end
 
     def image(path, *arguments)
         hash = arguments.to_beamer_hash
-        image_properties = __beamer_get_options(hash.pop_entries :width, :height)
-        create_oneline_block(:includegraphics, hash.merge!(:arguments => image_properties)) { path }
+        hash.set_beamer_arguments_from(:width, :height)
+        create_oneline_block(:includegraphics, hash) { path }
     end
 
     def section(title, &block)

@@ -1,18 +1,5 @@
 module RubyBeamer
-    class ::Array
-        def to_beamer_hash
-            inject({}) do |values, arg|
-                if(arg.is_a? Hash)
-                    values.merge! arg
-                else
-                    values[arg] = nil
-                end
-                values
-            end
-        end
-    end
-
-    class ::Hash
+    class Hash < ::Hash
         def remove_key(key)
             answer = has_key? key
             delete key
@@ -23,6 +10,25 @@ module RubyBeamer
             keys.inject({}) do |value, key|
                 value[key] = self.delete(key) if self.has_key? key
                 value
+            end
+        end
+
+        def set_beamer_arguments_from(*keys)
+            interesting = self.pop_entries(*keys)
+            self[:arguments] = __beamer_get_options(interesting)
+            self
+        end
+    end
+
+    class ::Array
+        def to_beamer_hash
+            inject(Hash.new) do |values, arg|
+                if(arg.is_a? ::Hash)
+                    values.merge! arg
+                else
+                    values[arg] = nil
+                end
+                values
             end
         end
     end

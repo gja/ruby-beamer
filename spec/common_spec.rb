@@ -13,12 +13,20 @@ describe "Get Options to Block" do
     it "Should be able to generate a beamer hash" do
         array = [:foo, :bar, {:ooga => "ooga", :booga => "booga"}]
         hash = array.to_beamer_hash
+
         hash.should have_key :foo
         hash[:foo].should be_nil
         hash.should have_key :bar
         hash[:bar].should be_nil
         hash[:ooga].should == "ooga"
         hash[:booga].should == "booga"
+    end
+
+    it "Should Be Able to Set Arguments from hash" do
+        hash = get_beamer_hash(:foo, :bar, :baz => 3)
+        
+        hash.set_beamer_arguments_from :foo, :baz
+        hash[:arguments].should == "[foo,baz=3]"
     end
 
     it "Should be able to delete a key if present" do
@@ -28,7 +36,7 @@ describe "Get Options to Block" do
     end
 
     it "Should be able to get interesting elements from the hash" do
-        hash = {:foo => 1, :bar => 2, :baz => 3}
+        hash = get_beamer_hash(:foo => 1, :bar => 2, :baz => 3)
 
         interesting = hash.pop_entries :foo, :bar, :spam
 
