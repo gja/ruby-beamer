@@ -18,11 +18,7 @@ module RubyBeamer
     def item(*args, &block)
         text = args.shift if args[0].is_a? String
         block = lambda { text } if text
-
-        properties = args[0] || {}
-        appear_on_slides = "<#{properties[:on]}>" if properties[:on]
-
-        create_oneline_block(:item, :arguments => appear_on_slides, &block)
+        create_oneline_block(:item, args.to_beamer_hash, &block)
     end
 
     def title_frame(*args)

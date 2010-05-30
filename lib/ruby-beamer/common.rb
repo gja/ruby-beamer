@@ -34,9 +34,10 @@ module RubyBeamer
     end
 
     def __print_block(starting, separator, content_start, ending, args, &block)
-        block_args = (args.delete :arguments or "")
+        block_args = (args.delete :arguments) || ""
+        appear_on = ("<#{args.delete :on}>" if args.has_key? :on) || ""
 
-        output starting, block_args, separator, content_start
+        output starting, appear_on, block_args, separator, content_start
         content = yield if block
         output content, separator if content
         output ending, "\n"
