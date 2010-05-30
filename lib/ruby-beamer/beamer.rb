@@ -1,18 +1,18 @@
 module RubyBeamer
-    def frame(title = nil, &block)
-        create_block(:frame, :arguments => "{#{title}}", &block)
+    def frame(title = nil, *args, &block)
+        create_block(:frame, args.to_beamer_hash.merge!(:arguments => "{#{title}}"), &block)
     end
 
-    def block(title, &passed_block)
-        create_block(:block, :arguments => "{#{title}}", &passed_block)
+    def block(title, *args, &passed_block)
+        create_block(:block, args.to_beamer_hash.merge!(:arguments => "{#{title}}"), &passed_block)
     end
 
-    def resize_box(width, height, &block)
-        create_oneline_block(:resizebox, :arguments => "{#{width}}{#{height}}", &block)
+    def resize_box(width, height, *args, &block)
+        create_oneline_block(:resizebox, args.to_beamer_hash.merge!(:arguments => "{#{width}}{#{height}}"), &block)
     end 
     
-    def itemized_list(&block)
-        create_block(:itemize, &block)
+    def itemized_list(*args, &block)
+        create_block(:itemize, args.to_beamer_hash, &block)
     end
 
     def item(*args, &block)
@@ -22,7 +22,9 @@ module RubyBeamer
     end
 
     def title_frame(*args)
-        create_block(:frame, :arguments => __beamer_get_options(*args)) { "\\titlepage" }
+        hash = args.to_beamer_hash
+        properties = hash.pop_entries :plain
+        create_block(:frame, hash.merge!(:arguments => __beamer_get_options(properties))) { "\\titlepage" }
     end
 
     def table_of_contents_frame(title, *arguments)
@@ -30,8 +32,9 @@ module RubyBeamer
     end
 
     def image(path, *arguments)
-        image_properties = __beamer_get_options(*arguments)
-        create_oneline_block(:includegraphics, :arguments => image_properties) { path }
+        hash = arguments.to_beamer_hash
+        image_properties = __beamer_get_options(hash.pop_entries :width, :height)
+        create_oneline_block(:includegraphics, hash.merge!(:arguments => image_properties)) { path }
     end
 
     def section(title, &block)

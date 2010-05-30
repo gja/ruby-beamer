@@ -26,6 +26,19 @@ describe "Get Options to Block" do
         hash.remove_key(:foo).should be_true
         hash.remove_key(:foo).should be_false
     end
+
+    it "Should be able to get interesting elements from the hash" do
+        hash = {:foo => 1, :bar => 2, :baz => 3}
+
+        interesting = hash.pop_entries :foo, :bar, :spam
+
+        interesting[:foo].should == 1
+        interesting[:bar].should == 2
+
+        hash.has_key?(:foo).should be_false
+        hash.has_key?(:bar).should be_false
+        hash.has_key?(:baz).should be_true
+    end
 end
 
 describe "Create Beamer Block" do

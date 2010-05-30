@@ -18,11 +18,18 @@ module RubyBeamer
             delete key
             answer
         end
+
+        def pop_entries(*keys)
+            keys.inject({}) do |value, key|
+                value[key] = self.delete(key) if self.has_key? key
+                value
+            end
+        end
     end
 
     def __beamer_get_options(*args)
-        return "" if args.empty?
         values = args.to_beamer_hash.inject([]) {|values, tuple| values << "#{tuple[0]}#{"=" if tuple[1]}#{tuple[1]}" }
+        return "" if values.empty?
         return "[" + values.join(",") + "]"
     end
 

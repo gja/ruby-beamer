@@ -44,4 +44,9 @@ text
         vspace { "2cm" }
         printed.should == "\\vspace{2cm}\n"
     end
+
+    it "Should be able to pass a show_on argument to em" do
+        em (:on => "5-") { "text" }
+        printed.should == "\\em<5->{text}\n"
+    end
 end
