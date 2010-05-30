@@ -21,20 +21,21 @@ module RubyBeamer
         create_oneline_block(type)
     end
 
-    def create_block(type, args = {}, &block)
-        arguments = args[:arguments] || ""
-        output "\\begin{#{type}}", arguments, "\n"
+    def __print_block(starting, separator, content_start, ending, args, &block)
+        block_args = (args.delete :arguments or "")
+
+        output starting, block_args, separator, content_start
         content = yield if block
-        output content, "\n" if content
-        output "\\end{#{type}}\n"
+        output content, separator if content
+        output ending, "\n"
+    end
+
+    def create_block(type, args = {}, &block)
+        __print_block("\\begin{#{type}}", "\n", "", "\\end{#{type}}", args, &block)
     end
 
     def create_oneline_block(type, args = {}, &block)
-        arguments = args[:arguments] || ""
-        output "\\#{type}#{arguments}{"
-        content = yield if block
-        output content if content
-        output "}\n"
+        __print_block("\\#{type}", "", "{", "}", args, &block)
     end
 
     def text
